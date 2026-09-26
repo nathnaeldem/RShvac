@@ -45,7 +45,7 @@
             <p class="story__paragraph">Whether it's routine maintenance, urgent repairs, or new installations, you can rely on Red Sea HVAC for prompt, reliable, and affordable service. By delivering energy-efficient and high-quality HVAC solutions, we ensure that our clients enjoy long-term comfort, improved air quality, and reduced utility expenses.</p>
             <div class="story__stats">
               <div class="story__stat">
-                <span class="story__stat-value">15+</span>
+                <span class="story__stat-value">5+</span>
                 <span class="story__stat-label">Years of Service</span>
               </div>
               <div class="story__stat">
@@ -84,7 +84,7 @@
         <div class="values__grid">
           <div v-for="(value, i) in coreValues" :key="value.title" class="values__card">
             <div class="values__card-top">
-              <span class="values__card-icon">{{ value.icon }}</span>
+              <span class="values__card-icon" v-html="value.icon"></span>
               <span class="values__card-num">{{ String(i + 1).padStart(2, '0') }}</span>
             </div>
             <h3 class="values__card-title">{{ value.title }}</h3>

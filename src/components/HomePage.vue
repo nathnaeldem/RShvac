@@ -43,7 +43,7 @@
           <div class="hero__trust animate-fade-up delay-4">
             <div class="hero__trust-item">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-              <span>15+ Years Experience</span>
+              <span>5+ Years Experience</span>
             </div>
             <div class="hero__trust-item">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
@@ -128,7 +128,7 @@
           <div v-for="(item, i) in whyUsItems" :key="item.title" class="why-us__card" :style="{ animationDelay: (i * 0.1) + 's' }">
             <div class="why-us__card-number">{{ String(i + 1).padStart(2, '0') }}</div>
             <div class="why-us__card-icon" :class="'why-us__card-icon--' + item.color">
-              <span>{{ item.icon }}</span>
+              <span v-html="item.icon"></span>
             </div>
             <h3 class="why-us__card-title">{{ item.title }}</h3>
             <p class="why-us__card-text">{{ item.desc }}</p>
@@ -237,7 +237,7 @@ export default {
   data() {
     return {
       heroStats: [
-        { value: '15+', label: 'Years Experience' },
+        { value: '5+', label: 'Years Experience' },
         { value: '5K+', label: 'Happy Customers' },
         { value: '24/7', label: 'Emergency Service' },
         { value: '100%', label: 'Satisfaction' }

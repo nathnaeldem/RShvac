@@ -7,8 +7,8 @@
           <img src="/images/Logo_2-01.png" alt="Red Sea HVAC Services" style="height: 50px; width: auto;" />
         </div>
         <div class="navbar__logo-text">
-          <span class="navbar__logo-name">RED SEA</span>
-          <span class="navbar__logo-tagline">HVAC SERVICES</span>
+          <span class="navbar__logo-name"></span>
+          <span class="navbar__logo-tagline"></span>
         </div>
       </a>
 

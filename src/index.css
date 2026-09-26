@@ -99,6 +99,12 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
+@media (min-width: 1025px) {
+  html {
+    zoom: 0.9;
+  }
+}
+
 body {
   font-family: var(--font-body);
   font-size: var(--fs-body);

@@ -417,11 +417,11 @@ export default {
 
 /* Mobile Menu */
 .navbar__mobile {
-  position: fixed;
+  position: absolute;
   top: var(--nav-height);
   left: 0;
   right: 0;
-  bottom: 0;
+  height: calc(100vh - var(--nav-height));
   background: var(--rs-white);
   overflow-y: auto;
   z-index: 999;

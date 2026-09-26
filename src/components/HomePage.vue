@@ -165,9 +165,9 @@
       </div>
     </section>
 
-    <!-- ===== TESTIMONIALS ===== -->
-    <section class="testimonials section-padding" style="background: var(--rs-gray-50);">
-      <div class="container">
+    <!-- ===== TESTIMONIALS CAROUSEL ===== -->
+    <section class="testimonials section-padding" style="background: var(--rs-gray-50); overflow: hidden;">
+      <div class="container" style="position: relative;">
         <div class="section-header">
           <span class="section-badge">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
@@ -175,14 +175,34 @@
           </span>
           <h2 class="section-title">What Our Customers Say</h2>
         </div>
-        <div class="testimonials-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
-          <div v-for="(review, index) in testimonials" :key="index" class="testimonial-card" style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); border: 1px solid var(--rs-gray-200);">
-            <div style="display: flex; color: #fbbf24; margin-bottom: 1rem;">
-              <svg v-for="star in 5" :key="star" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        
+        <div class="testimonials-carousel" style="position: relative; max-width: 800px; margin: 0 auto; display: flex; align-items: center;">
+          <button @click="prevTestimonial" class="carousel-btn prev-btn" aria-label="Previous review">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+
+          <div class="carousel-window" style="overflow: hidden; width: 100%; padding: 1rem;">
+            <div class="carousel-track" :style="{ transform: `translateX(-${currentTestimonialIndex * 100}%)`, transition: 'transform 0.5s ease-in-out', display: 'flex' }">
+              <div v-for="(review, index) in testimonials" :key="index" class="carousel-slide" style="min-width: 100%; padding: 0 1rem; box-sizing: border-box;">
+                <div class="testimonial-card" style="background: white; padding: 3rem 2rem; border-radius: 16px; box-shadow: var(--shadow-lg); border: 1px solid var(--rs-gray-200); text-align: center; height: 100%;">
+                  <div style="display: flex; justify-content: center; color: #fbbf24; margin-bottom: 1.5rem;">
+                    <svg v-for="star in 5" :key="star" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  </div>
+                  <p style="color: var(--rs-gray-700); font-size: 1.1rem; line-height: 1.8; margin-bottom: 2rem; font-style: italic;">"{{ review.text }}"</p>
+                  <div style="font-weight: 800; font-size: 1.1rem; color: var(--rs-dark);">{{ review.name }}</div>
+                  <div style="color: var(--rs-gray-500); font-size: 0.9rem; margin-top: 0.5rem;">Verified Customer</div>
+                </div>
+              </div>
             </div>
-            <p style="color: var(--rs-gray-600); font-size: 1rem; line-height: 1.6; margin-bottom: 1.5rem; font-style: italic;">"{{ review.text }}"</p>
-            <div style="font-weight: 700; color: var(--rs-dark);">{{ review.name }}</div>
           </div>
+
+          <button @click="nextTestimonial" class="carousel-btn next-btn" aria-label="Next review">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+
+        <div class="carousel-dots" style="display: flex; justify-content: center; gap: 8px; margin-top: 2rem;">
+          <button v-for="(_, index) in testimonials" :key="index" @click="currentTestimonialIndex = index" :style="{ width: currentTestimonialIndex === index ? '24px' : '8px', height: '8px', borderRadius: '4px', background: currentTestimonialIndex === index ? 'var(--rs-blue)' : 'var(--rs-gray-300)', border: 'none', transition: 'all 0.3s ease', cursor: 'pointer', padding: 0 }" aria-label="Go to slide"></button>
         </div>
       </div>
     </section>
@@ -308,23 +328,64 @@ export default {
         service: '',
         message: ''
       },
+      currentTestimonialIndex: 0,
+      testimonialInterval: null,
       testimonials: [
-        {
-          name: 'Achamyelesh Gebereegziabher',
-          text: 'Excellent service from start to finish! The team was professional, friendly, and did a great job installing my new AC system. They worked efficiently, kept everything clean, and made sure everything was working perfectly. Highly recommend them!'
-        },
-        {
-          name: 'Yohannese Hassen',
-          text: 'Red Sea LLC is an extremely competent and professional service company. The technician identified and resolved all the issues. I am grateful for Red Sea\'s prompt response and turnaround time.'
-        },
-        {
-          name: 'Mohammed Al-Junaibi',
-          text: 'The air conditioning repair service was fantastic! They arrived promptly, diagnosed the issue quickly, and fixed it on the same day. My AC is working perfectly now. Highly recommend them for their reliability and efficiency!'
-        }
+        { name: 'Achamyelesh Gebereegziabher', text: 'Excellent service from start to finish! The team was professional, friendly, and did a great job installing my new AC system. They worked efficiently, kept everything clean, and made sure everything was working perfectly. Highly recommend them!' },
+        { name: 'Mohammed Al-Junaibi', text: 'The air conditioning repair service was fantastic! They arrived promptly, diagnosed the issue quickly, and fixed it on the same day. My AC is working perfectly now. Highly recommend them for their reliability and efficiency!' },
+        { name: 'กุลธิดา เหมรา', text: 'Red Sea Heating and Air Conditioning LLC provided exceptional service when my HVAC system broke down. They were prompt, professional, and had everything running perfectly in no time.' },
+        { name: 'Majid Al Saadi', text: 'From scheduling the appointment to completing the repair, the customer service was exceptional. The staff was polite, helpful, and kept me informed throughout the process. My AC is running smoothly again, thanks to them!' },
+        { name: 'ฐิติมา รัตนทองดี', text: 'The technicians at Red Sea Heating and Air Conditioning LLC are highly skilled and courteous. They diagnosed and fixed my heating system quickly and at a fair price.' },
+        { name: 'Jaber Al-Tourshi', text: 'The technicians were very respectful of my home. They worked cleanly and tidied up after themselves once the repair was completed. The AC is working like new, and I couldn’t be happier!' },
+        { name: 'จุติพร ผลอุดม', text: 'I highly recommend Red Sea Heating and Air Conditioning LLC for their reliable and efficient services. Their team is knowledgeable and always goes the extra mile to ensure customer satisfaction.' },
+        { name: 'Sheikha Al Saadi', text: 'The service was worth every penny. They provided a detailed diagnosis and fixed the problem efficiently. My AC is running better than ever, and I’ll definitely use their services again in the future.' },
+        { name: 'ชรินรัตน์ เวชกามา', text: 'Red Sea Heating and Air Conditioning LLC installed a new air conditioning system in my home, and I couldn’t be happier. The process was seamless, and the quality of work was top-notch.' },
+        { name: 'Mohamed Al-Farsi', text: 'My AC broke down during a heatwave, and this company came to the rescue! They responded quickly and had my system up and running in no time. I’m so grateful for their prompt and efficient service.' },
+        { name: 'Talal Al Shidi', text: 'The repair team was highly skilled and fixed an issue that another company couldn’t solve. They explained everything in detail and made sure I was comfortable with the work being done. Great experience!' },
+        { name: 'Mahfouda Al Rashdi', text: 'The technicians were professional, courteous, and knowledgeable. They explained the problem clearly and provided a fair estimate. Their work was top-notch, and I’m very satisfied with the results' },
+        { name: 'Yohannese Hassen', text: 'Red Sea LLC is an extremely competent and professional service company. The technician identified and resolved all the issues. I am grateful for Red Sea\'s prompt response and turnaround time.' },
+        { name: 'Mohammed Al Rushadi', text: 'I highly recommend this company for air conditioning repair. Their professionalism, expertise, and customer service are unmatched. They’ve earned a loyal customer in me!' },
+        { name: 'Haitham Al Majarfi', text: 'This is my go-to air conditioning repair service. They’re always dependable, honest, and thorough. I trust them completely to handle any issues with my HVAC system' },
+        { name: 'Dawit Tsegaye', text: 'Red Sea Heating and Air Conditioning is one business I would confidently recommend to anyone who would want good quality, good value, professional, responsive, and on-time workmanship. Thank your for your honesty that is rare these days.' },
+        { name: 'Meliquades', text: 'Quick to respond with efficient and economical HVAC repairs. He can keep your unit performing well even when the bigger companies suggest you replace your entire HVAC unit. Try this company, you’ll like the service.' },
+        { name: 'Wadhha Al Mukhaini', text: 'This repair service is both affordable and honest. They didn’t try to upsell unnecessary parts or services. They fixed my AC unit efficiently, and the pricing was very reasonable. Highly recommend' },
+        { name: 'Suleyman Uncu', text: 'Yoel always responds promptly. He is very professional and knows heating and air conditioning inside out. His charges are more than reasonable. I would highly recommend him to anyone needing help with their systems.' },
+        { name: 'Dindo Mabana', text: 'I highly recommend Red Sea HVAC company working with any HVAC related project to any home. Their work is absolutely well done & I am so really glad with the result plus the Yoel & the team, they are such the best team together!' },
+        { name: 'BJ Lanier', text: 'Yoel and crew did an OUTSTANDING job replacing my old 1999 original unit. Highly rec’ Yoel and Red Sea for any job you might have.' },
+        { name: 'ALBAR YOVANI', text: 'Great experience from start to finish. Quality workmanship and excellent customer service.' },
+        { name: 'MUHAMMAD ZAINUL RAHMAN', text: 'Amazing experience with Red Sea HVAC. The team was prompt, professional, and solved our heating issue with ease!' },
+        { name: 'Edgar Gonzales', text: 'Very good, fast and responsive service. My problem was quickly fixed and I will be returning to Red Sea for future work.' },
+        { name: 'Andrea J. Dutto', text: 'Very good experience. Professional, thorough, and neat. Came immediately as well.' }
       ]
     }
   },
+  mounted() {
+    this.startCarousel();
+  },
+  beforeUnmount() {
+    this.stopCarousel();
+  },
   methods: {
+    nextTestimonial() {
+      this.currentTestimonialIndex = (this.currentTestimonialIndex + 1) % this.testimonials.length;
+      this.resetCarousel();
+    },
+    prevTestimonial() {
+      this.currentTestimonialIndex = (this.currentTestimonialIndex - 1 + this.testimonials.length) % this.testimonials.length;
+      this.resetCarousel();
+    },
+    startCarousel() {
+      this.testimonialInterval = setInterval(() => {
+        this.currentTestimonialIndex = (this.currentTestimonialIndex + 1) % this.testimonials.length;
+      }, 5000);
+    },
+    stopCarousel() {
+      if (this.testimonialInterval) clearInterval(this.testimonialInterval);
+    },
+    resetCarousel() {
+      this.stopCarousel();
+      this.startCarousel();
+    },
     particleStyle(n) {
       const sizes = [4, 6, 3, 5, 4, 7]
       const positions = [
@@ -816,6 +877,46 @@ export default {
   gap: var(--space-md);
   color: var(--rs-gray-600);
   font-weight: 500;
+}
+
+/* Testimonial Carousel Styles */
+.carousel-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--rs-white);
+  border: 1px solid var(--rs-gray-200);
+  box-shadow: var(--shadow-md);
+  color: var(--rs-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+.carousel-btn:hover {
+  background: var(--rs-blue);
+  color: var(--rs-white);
+  border-color: var(--rs-blue);
+}
+
+.prev-btn {
+  left: -20px;
+}
+
+.next-btn {
+  right: -20px;
+}
+
+@media (max-width: 768px) {
+  .carousel-btn {
+    display: none;
+  }
 }
 
 /* Form Styles */

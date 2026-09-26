@@ -43,7 +43,7 @@
           <div class="hero__trust animate-fade-up delay-4">
             <div class="hero__trust-item">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-              <span>5+ Years Experience</span>
+              <span>15+ Years Experience</span>
             </div>
             <div class="hero__trust-item">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
@@ -165,6 +165,28 @@
       </div>
     </section>
 
+    <!-- ===== TESTIMONIALS ===== -->
+    <section class="testimonials section-padding" style="background: var(--rs-gray-50);">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+            Client Reviews
+          </span>
+          <h2 class="section-title">What Our Customers Say</h2>
+        </div>
+        <div class="testimonials-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+          <div v-for="(review, index) in testimonials" :key="index" class="testimonial-card" style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); border: 1px solid var(--rs-gray-200);">
+            <div style="display: flex; color: #fbbf24; margin-bottom: 1rem;">
+              <svg v-for="star in 5" :key="star" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <p style="color: var(--rs-gray-600); font-size: 1rem; line-height: 1.6; margin-bottom: 1.5rem; font-style: italic;">"{{ review.text }}"</p>
+            <div style="font-weight: 700; color: var(--rs-dark);">{{ review.name }}</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ===== QUICK QUOTE FORM ===== -->
     <section class="quick-quote section-padding">
       <div class="container">
@@ -237,8 +259,8 @@ export default {
   data() {
     return {
       heroStats: [
-        { value: '5+', label: 'Years Experience' },
-        { value: '5K+', label: 'Happy Customers' },
+        { value: '15+', label: 'Years Experience' },
+        { value: '200+', label: 'Happy Customers' },
         { value: '24/7', label: 'Emergency Service' },
         { value: '100%', label: 'Satisfaction' }
       ],
@@ -285,7 +307,21 @@ export default {
         email: '',
         service: '',
         message: ''
-      }
+      },
+      testimonials: [
+        {
+          name: 'Achamyelesh Gebereegziabher',
+          text: 'Excellent service from start to finish! The team was professional, friendly, and did a great job installing my new AC system. They worked efficiently, kept everything clean, and made sure everything was working perfectly. Highly recommend them!'
+        },
+        {
+          name: 'Yohannese Hassen',
+          text: 'Red Sea LLC is an extremely competent and professional service company. The technician identified and resolved all the issues. I am grateful for Red Sea\'s prompt response and turnaround time.'
+        },
+        {
+          name: 'Mohammed Al-Junaibi',
+          text: 'The air conditioning repair service was fantastic! They arrived promptly, diagnosed the issue quickly, and fixed it on the same day. My AC is working perfectly now. Highly recommend them for their reliability and efficiency!'
+        }
+      ]
     }
   },
   methods: {

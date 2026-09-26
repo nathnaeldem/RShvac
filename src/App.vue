@@ -19,7 +19,6 @@ import ServicesPage from './components/ServicesPage.vue'
 import ResidentialPage from './components/ResidentialPage.vue'
 import CommercialPage from './components/CommercialPage.vue'
 import AirQualityPage from './components/AirQualityPage.vue'
-import FinancingPage from './components/FinancingPage.vue'
 import ContactPage from './components/ContactPage.vue'
 
 export default {
@@ -33,7 +32,6 @@ export default {
     ResidentialPage,
     CommercialPage,
     AirQualityPage,
-    FinancingPage,
     ContactPage
   },
   data() {
@@ -50,7 +48,6 @@ export default {
         residential: 'ResidentialPage',
         commercial: 'CommercialPage',
         'air-quality': 'AirQualityPage',
-        financing: 'FinancingPage',
         contact: 'ContactPage'
       }
       return map[this.currentPage] || 'HomePage'

@@ -45,11 +45,11 @@
             <p class="story__paragraph">Whether it's routine maintenance, urgent repairs, or new installations, you can rely on Red Sea HVAC for prompt, reliable, and affordable service. By delivering energy-efficient and high-quality HVAC solutions, we ensure that our clients enjoy long-term comfort, improved air quality, and reduced utility expenses.</p>
             <div class="story__stats">
               <div class="story__stat">
-                <span class="story__stat-value">5+</span>
+                <span class="story__stat-value">15+</span>
                 <span class="story__stat-label">Years of Service</span>
               </div>
               <div class="story__stat">
-                <span class="story__stat-value">5K+</span>
+                <span class="story__stat-value">200+</span>
                 <span class="story__stat-label">Projects Completed</span>
               </div>
               <div class="story__stat">

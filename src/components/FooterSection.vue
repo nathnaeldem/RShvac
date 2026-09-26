@@ -34,7 +34,6 @@
             <li><a href="#" @click.prevent="$emit('navigate', 'home')">Home</a></li>
             <li><a href="#" @click.prevent="$emit('navigate', 'about')">About Us</a></li>
             <li><a href="#" @click.prevent="$emit('navigate', 'services')">Our Services</a></li>
-            <li><a href="#" @click.prevent="$emit('navigate', 'financing')">Financing</a></li>
             <li><a href="#" @click.prevent="$emit('navigate', 'contact')">Contact Us</a></li>
           </ul>
         </div>

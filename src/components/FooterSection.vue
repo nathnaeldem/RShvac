@@ -5,7 +5,7 @@
         <!-- Brand Info -->
         <div class="footer__brand">
           <a href="#" class="footer__logo" @click.prevent="$emit('navigate', 'home')">
-            <img src="/images/Logo_2-01.png" alt="Red Sea HVAC Services" style="height: 50px; width: auto;" />
+            <img src="/images/Logo_2-01.png" alt="Red Sea HVAC Services" style="height: 90px; width: auto;" />
             <div class="footer__logo-text">
               <span class="footer__logo-name">RED SEA</span>
               <span class="footer__logo-tagline">HVAC SERVICES</span>

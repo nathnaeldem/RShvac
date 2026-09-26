@@ -21,7 +21,7 @@
         <div class="services-main-grid">
           
           <!-- Residential AC -->
-          <div class="service-detail-card" @click="$emit('navigate', 'residential')">
+          <div class="service-detail-card" style="background-image: url('/images/residential_AC.jpg');" @click="$emit('navigate', 'residential')">
             <div class="service-detail-card__icon">
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
             </div>
@@ -31,7 +31,7 @@
           </div>
 
           <!-- Commercial AC -->
-          <div class="service-detail-card" @click="$emit('navigate', 'commercial')">
+          <div class="service-detail-card" style="background-image: url('/images/commercial_AC.jpg');" @click="$emit('navigate', 'commercial')">
             <div class="service-detail-card__icon">
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><line x1="9" y1="22" x2="15" y2="22"></line><line x1="8" y1="6" x2="8.01" y2="6"></line><line x1="16" y1="6" x2="16.01" y2="6"></line><line x1="12" y1="6" x2="12.01" y2="6"></line><line x1="12" y1="10" x2="12.01" y2="10"></line><line x1="12" y1="14" x2="12.01" y2="14"></line><line x1="16" y1="10" x2="16.01" y2="10"></line><line x1="16" y1="14" x2="16.01" y2="14"></line><line x1="8" y1="10" x2="8.01" y2="10"></line><line x1="8" y1="14" x2="8.01" y2="14"></line></svg>
             </div>
@@ -41,7 +41,7 @@
           </div>
 
           <!-- Residential Heating -->
-          <div class="service-detail-card" @click="$emit('navigate', 'residential')">
+          <div class="service-detail-card" style="background-image: url('/images/residential_AC.jpg');" @click="$emit('navigate', 'residential')">
             <div class="service-detail-card__icon" style="color: var(--rs-red); background: rgba(239, 41, 32, 0.1);">
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C12 2 12 12 19 12C19 12 12 22 12 22C12 22 12 12 5 12C5 12 12 2 12 2Z"></path><path d="M12 22v-6"></path></svg>
             </div>
@@ -51,7 +51,7 @@
           </div>
 
           <!-- Commercial Heating -->
-          <div class="service-detail-card" @click="$emit('navigate', 'commercial')">
+          <div class="service-detail-card" style="background-image: url('/images/commercial_AC.jpg');" @click="$emit('navigate', 'commercial')">
             <div class="service-detail-card__icon" style="color: var(--rs-red); background: rgba(239, 41, 32, 0.1);">
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
             </div>
@@ -61,7 +61,7 @@
           </div>
 
           <!-- Indoor Air Quality -->
-          <div class="service-detail-card" @click="$emit('navigate', 'air-quality')">
+          <div class="service-detail-card" style="background-image: url('/images/indoor_AC.jpeg');" @click="$emit('navigate', 'air-quality')">
             <div class="service-detail-card__icon" style="color: #22c55e; background: rgba(34, 197, 94, 0.1);">
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"></path></svg>
             </div>
@@ -195,7 +195,9 @@ export default {
 }
 
 .service-detail-card {
-  background: var(--rs-white);
+  position: relative;
+  background-size: cover;
+  background-position: center;
   border-radius: var(--radius-xl);
   padding: var(--space-3xl);
   border: 1px solid var(--rs-gray-200);
@@ -204,6 +206,25 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  overflow: hidden;
+}
+
+.service-detail-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 15, 26, 0.75);
+  z-index: 1;
+  transition: background var(--transition-smooth);
+}
+
+.service-detail-card:hover::before {
+  background: rgba(10, 15, 26, 0.6);
+}
+
+.service-detail-card > * {
+  position: relative;
+  z-index: 2;
 }
 
 .service-detail-card:hover {
@@ -219,8 +240,9 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(27, 121, 191, 0.1);
-  color: var(--rs-blue);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(5px);
+  color: var(--rs-white);
   margin-bottom: var(--space-lg);
 }
 
@@ -228,13 +250,13 @@ export default {
   font-size: var(--fs-h3);
   font-weight: 800;
   margin-bottom: var(--space-md);
-  color: var(--rs-dark);
+  color: var(--rs-white);
 }
 
 .service-detail-card__text {
   font-size: var(--fs-body);
   line-height: 1.7;
-  color: var(--rs-gray-600);
+  color: rgba(255, 255, 255, 0.85);
   margin-bottom: var(--space-xl);
   flex-grow: 1;
 }
@@ -244,7 +266,7 @@ export default {
   align-items: center;
   gap: var(--space-sm);
   font-weight: 600;
-  color: var(--rs-blue);
+  color: var(--rs-white);
   font-size: var(--fs-body);
   transition: gap var(--transition-base);
 }

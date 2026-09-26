@@ -3,7 +3,7 @@
     <!-- Page Hero -->
     <section class="page-hero">
       <div class="page-hero__bg">
-        <img src="/images/about-team.jpg" alt="Red Sea HVAC Team" class="page-hero__bg-img" />
+       
         <div class="page-hero__overlay"></div>
       </div>
       <div class="container page-hero__content">
